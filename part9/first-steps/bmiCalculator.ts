@@ -1,20 +1,20 @@
-interface BodyValues {
+export interface BodyValues {
   value1: number;
   value2: number;
 }
 
-const calculateBmi = (h: number, m: number) : string => {
-  let bmi = m / ((h / 100) ** 2)
+export const calculateBmi = (h: number, m: number) : string => {
+  const bmi = m / ((h / 100) ** 2);
   if (bmi < 25) {
-    return 'Normal range'
+    return 'Normal range';
   } else if (bmi >= 25 && bmi < 30) {
-    return 'Overweight'
+    return 'Overweight';
   } else {
-    return 'Obese'
+    return 'Obese';
   }
-} 
+}; 
 
-const parseArguments = (args: string[]): BodyValues => {
+export const parseArguments = (args: string[]): BodyValues => {
   if (args.length < 4) throw new Error('Not enough arguments');
   if (args.length > 4) throw new Error('Too many arguments');
 
@@ -22,19 +22,19 @@ const parseArguments = (args: string[]): BodyValues => {
     return {
       value1: Number(args[2]),
       value2: Number(args[3])
-    }
+    };
   } else {
-    throw new Error('Provided values are not numbers')
+    throw new Error('Provided values are not numbers');
   }
-}
+};
 
 try {
   const { value1, value2} = parseArguments(process.argv);
-  console.log(calculateBmi(value1, value2))
+  console.log(calculateBmi(value1, value2));
 } catch(error: unknown) {
-  let errorMessage = 'Something went wrong.'
+  let errorMessage = 'Something went wrong.';
   if (error instanceof Error) {
-    errorMessage += ' Error: ' + error.message
+    errorMessage += ' Error: ' + error.message;
   }
-  console.log(errorMessage)
+  console.log(errorMessage);
 }
